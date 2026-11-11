@@ -1,4 +1,4 @@
-"""Notification texts, in the language Home Assistant is set to."""
+"""Notification texts, in the language Home Assistant is set to (en or it, else en)."""
 
 from __future__ import annotations
 
