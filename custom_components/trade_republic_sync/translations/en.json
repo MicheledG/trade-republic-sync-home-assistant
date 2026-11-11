@@ -83,7 +83,8 @@
           "ok": "Done",
           "error": "Failed",
           "expired": "Expired",
-          "wrong_account": "Wrong account"
+          "wrong_account": "Wrong account",
+          "cancelled": "Cancelled"
         }
       },
       "last_sync": {

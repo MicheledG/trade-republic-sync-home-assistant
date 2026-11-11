@@ -10,10 +10,11 @@ It talks to a sync service you run yourself, which exposes three routes:
 |---|---|
 | `POST /runs` (header `X-Api-Key`, body `{"arm_hours": n}`) | arm a run; answers `run_id`, `state`, `approve_url` |
 | `GET /runs/<run_id>` (header `X-Api-Key`) | the run's `state`, and when it ends its `summary` and `problems` |
+| `DELETE /runs/<run_id>` (header `X-Api-Key`) | cancel a run that has not started syncing; `409` once it has |
 | `GET /go?run=<run_id>` | the link in the notification: starts the login and opens the app |
 
 States: `armed`, `starting`, `waiting`, `claimed`, `syncing`, then `ok`,
-`error`, `expired` or `wrong_account`. A lapsed login goes back to `armed`.
+`error`, `expired`, `wrong_account` or `cancelled`. A lapsed login goes back to `armed`.
 
 ## Install
 
@@ -24,6 +25,12 @@ States: `armed`, `starting`, `waiting`, `claimed`, `syncing`, then `ok`,
    enter the service URL and the API key.
 4. In the integration's options, choose the schedule and the notify service
    of your phone (the Home Assistant companion app).
+
+## Notifications
+
+The approval notification rings (high priority) and offers *Later* (again in
+2 hours, within the run's window) and *Cancel*. Progress and outcomes arrive
+on a silent channel; a failure offers *Retry*.
 
 ## Entities
 

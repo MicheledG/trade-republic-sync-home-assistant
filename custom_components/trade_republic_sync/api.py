@@ -57,6 +57,15 @@ class SyncApi:
             raise SyncApiError(f"unexpected status {status}")
         return body
 
+    async def async_cancel(self, run_id: str) -> dict | None:
+        """Close a run that has not started syncing; None if the backend no longer has it."""
+        status, body = await self._request("DELETE", f"/runs/{run_id}")
+        if status in (404, 409):
+            return None
+        if status != 200:
+            raise SyncApiError(f"unexpected status {status}")
+        return body
+
     async def async_run(self, run_id: str) -> dict | None:
         status, body = await self._request("GET", f"/runs/{run_id}")
         if status == 404:

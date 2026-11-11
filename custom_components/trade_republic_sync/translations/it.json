@@ -83,7 +83,8 @@
           "ok": "Completata",
           "error": "Fallita",
           "expired": "Scaduta",
-          "wrong_account": "Conto diverso"
+          "wrong_account": "Conto diverso",
+          "cancelled": "Annullata"
         }
       },
       "last_sync": {

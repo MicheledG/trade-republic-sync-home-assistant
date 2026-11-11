@@ -10,14 +10,14 @@ from __future__ import annotations
 from datetime import datetime
 
 from homeassistant.const import Platform
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import Event, HomeAssistant, callback
 from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.event import async_track_time_change
 from homeassistant.helpers.update_coordinator import UpdateFailed
 
 from .api import SyncApi, SyncApiError, SyncAuthError
-from .const import CONF_API_KEY, CONF_URL
+from .const import ACTIONS, CONF_API_KEY, CONF_URL
 from .coordinator import SyncConfigEntry, SyncCoordinator
 from .schedule import due_now
 
@@ -45,6 +45,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: SyncConfigEntry) -> bool
             hass.async_create_task(_scheduled_start(coordinator))
 
     entry.async_on_unload(async_track_time_change(hass, _tick, second=0))
+
+    @callback
+    def _action(event: Event) -> None:
+        if event.data.get("action") in ACTIONS:
+            hass.async_create_task(coordinator.async_handle_action(event))
+
+    entry.async_on_unload(hass.bus.async_listen("mobile_app_notification_action", _action))
+    entry.async_on_unload(coordinator.async_shutdown_reminder)
     entry.async_on_unload(entry.add_update_listener(_reload))
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
