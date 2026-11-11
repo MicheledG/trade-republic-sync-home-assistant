@@ -17,7 +17,8 @@ States: `armed`, `starting`, `waiting`, `claimed`, `syncing`, then `ok`,
 
 ## Install
 
-1. In HACS: *Custom repositories*, add this repository as an *Integration*.
+1. In the Marketplace (HACS before Home Assistant 2026.11): *Custom
+   repositories*, add this repository as an *Integration*.
 2. Install **Trade Republic Sync** and restart Home Assistant.
 3. *Settings → Devices & services → Add integration → Trade Republic Sync*:
    enter the service URL and the API key.
