@@ -241,7 +241,7 @@ class SyncCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         channel = {"channel": CHANNEL_OUTCOME, "importance": "low"} if quiet else {
             "channel": CHANNEL_APPROVAL, "importance": "high"}
         payload: dict[str, Any] = {
-            "title": "Trade Republic",
+            "title": "Trade Republic Sync",
             "message": message,
             "data": {
                 "tag": NOTIFICATION_TAG,

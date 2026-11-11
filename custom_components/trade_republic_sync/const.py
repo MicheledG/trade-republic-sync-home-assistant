@@ -41,8 +41,8 @@ REQUEST_TIMEOUT_SECONDS: Final = 30
 
 NOTIFICATION_TAG: Final = "trade_republic_sync"
 # Android channels: the approval must ring; progress and outcomes stay quiet.
-CHANNEL_APPROVAL: Final = "Trade Republic"
-CHANNEL_OUTCOME: Final = "Trade Republic esiti"
+CHANNEL_APPROVAL: Final = "Trade Republic Sync"
+CHANNEL_OUTCOME: Final = "Trade Republic Sync esiti"
 
 # Actions on the notification, answered through mobile_app_notification_action.
 ACTION_SNOOZE: Final = "TRADE_REPUBLIC_SYNC_SNOOZE"
