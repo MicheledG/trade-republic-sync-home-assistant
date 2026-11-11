@@ -1,0 +1,97 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Trade Republic Sync",
+        "data": {
+          "url": "URL del servizio",
+          "api_key": "Chiave API"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Nuova chiave API",
+        "data": {
+          "api_key": "Chiave API"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Chiave API rifiutata",
+      "cannot_connect": "Servizio irraggiungibile",
+      "not_https": "L'URL deve iniziare con https://"
+    },
+    "abort": {
+      "already_configured": "Già configurato",
+      "reauth_successful": "Chiave API aggiornata"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Pianificazione",
+        "data": {
+          "frequency": "Frequenza",
+          "time": "Ora",
+          "weekdays": "Giorni della settimana",
+          "month_day": "Giorno del mese",
+          "arm_hours": "Link valido per",
+          "notify_service": "Notifica"
+        },
+        "data_description": {
+          "month_day": "Oltre la fine del mese, l'ultimo giorno."
+        }
+      }
+    }
+  },
+  "selector": {
+    "frequency": {
+      "options": {
+        "off": "Disattivata",
+        "daily": "Giornaliera",
+        "weekly": "Settimanale",
+        "monthly": "Mensile"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Lunedì",
+        "tue": "Martedì",
+        "wed": "Mercoledì",
+        "thu": "Giovedì",
+        "fri": "Venerdì",
+        "sat": "Sabato",
+        "sun": "Domenica"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "sync_now": {
+        "name": "Sincronizza ora"
+      }
+    },
+    "sensor": {
+      "state": {
+        "name": "Stato",
+        "state": {
+          "idle": "Inattivo",
+          "armed": "In attesa del tocco",
+          "starting": "Avvio",
+          "waiting": "In attesa di approvazione",
+          "claimed": "Approvazione",
+          "syncing": "Sincronizzazione",
+          "ok": "Completata",
+          "error": "Fallita",
+          "expired": "Scaduta",
+          "wrong_account": "Conto diverso"
+        }
+      },
+      "last_sync": {
+        "name": "Ultima sincronizzazione"
+      },
+      "next_sync": {
+        "name": "Prossima sincronizzazione"
+      }
+    }
+  }
+}

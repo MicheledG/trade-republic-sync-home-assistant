@@ -1,0 +1,97 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Trade Republic Sync",
+        "data": {
+          "url": "Service URL",
+          "api_key": "API key"
+        }
+      },
+      "reauth_confirm": {
+        "title": "New API key",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "API key refused",
+      "cannot_connect": "Service unreachable",
+      "not_https": "The URL must start with https://"
+    },
+    "abort": {
+      "already_configured": "Already configured",
+      "reauth_successful": "API key updated"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Schedule",
+        "data": {
+          "frequency": "Frequency",
+          "time": "Time",
+          "weekdays": "Days of the week",
+          "month_day": "Day of the month",
+          "arm_hours": "Link valid for",
+          "notify_service": "Notify"
+        },
+        "data_description": {
+          "month_day": "Past the month's end, its last day."
+        }
+      }
+    }
+  },
+  "selector": {
+    "frequency": {
+      "options": {
+        "off": "Off",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "sync_now": {
+        "name": "Sync now"
+      }
+    },
+    "sensor": {
+      "state": {
+        "name": "State",
+        "state": {
+          "idle": "Idle",
+          "armed": "Waiting for tap",
+          "starting": "Starting",
+          "waiting": "Waiting for approval",
+          "claimed": "Approving",
+          "syncing": "Syncing",
+          "ok": "Done",
+          "error": "Failed",
+          "expired": "Expired",
+          "wrong_account": "Wrong account"
+        }
+      },
+      "last_sync": {
+        "name": "Last sync"
+      },
+      "next_sync": {
+        "name": "Next sync"
+      }
+    }
+  }
+}
