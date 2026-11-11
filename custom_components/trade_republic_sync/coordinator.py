@@ -30,6 +30,9 @@ from .const import (
     DEFAULT_ARM_HOURS,
     DOMAIN,
     FINAL_STATES,
+    NOTIFICATION_COLOR,
+    NOTIFICATION_ICON,
+    NOTIFICATION_LARGE_ICON,
     NOTIFICATION_TAG,
     OPT_ARM_HOURS,
     OPT_NOTIFY,
@@ -136,7 +139,10 @@ class SyncCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         elif state == "ok":
             await self._notify_done(new)
         elif state == "error":
-            await self._notify(text(self.hass, "error"), quiet=True, data=self._retry())
+            message = text(self.hass, "error")
+            if new.get("wrote") is False:  # an older backend says nothing: claim nothing
+                message += text(self.hass, "nothing_written")
+            await self._notify(message, quiet=True, data=self._retry())
         elif state == "wrong_account":
             await self._notify(text(self.hass, "wrong_account"))
         elif state in ("expired", "cancelled"):
@@ -147,12 +153,20 @@ class SyncCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         count = int(summary.get("to_create") or 0)
         adopted = int(summary.get("adopted_manual") or 0)
         problems = len(run.get("problems") or [])
-        message = text(self.hass, "done", count=count) if count else text(self.hass, "done_none")
+        if count == 1:
+            parts = [text(self.hass, "new_one")]
+        elif count:
+            parts = [text(self.hass, "new_many", count=count)]
+        else:
+            parts = [text(self.hass, "new_none")]
         if adopted:
-            message += text(self.hass, "adopted", adopted=adopted)
+            parts.append(text(self.hass, "adopted", adopted=adopted))
         data: dict[str, Any] = {}
         if problems:
-            message += text(self.hass, "problems", problems=problems)
+            parts.append(text(self.hass, "problems", problems=problems))
+        message = text(self.hass, "done", parts=", ".join(parts))
+        if problems:
+            message += text(self.hass, "open_wallet")
             data["clickAction"] = WALLET_APP
         await self._notify(message, quiet=True, data=data)
 
@@ -229,7 +243,14 @@ class SyncCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         payload: dict[str, Any] = {
             "title": "Trade Republic",
             "message": message,
-            "data": {"tag": NOTIFICATION_TAG, **channel, **(data or {})},
+            "data": {
+                "tag": NOTIFICATION_TAG,
+                "notification_icon": NOTIFICATION_ICON,
+                "color": NOTIFICATION_COLOR,
+                "icon_url": NOTIFICATION_LARGE_ICON,
+                **channel,
+                **(data or {}),
+            },
         }
         await self._call_notify(service, payload)
 

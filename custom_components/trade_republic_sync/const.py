@@ -51,5 +51,13 @@ ACTION_RETRY: Final = "TRADE_REPUBLIC_SYNC_RETRY"
 ACTIONS: Final = (ACTION_SNOOZE, ACTION_CANCEL, ACTION_RETRY)
 SNOOZE: Final = timedelta(hours=2)
 
+# The look of every notification on Android: the integration's own icon and colour.
+NOTIFICATION_ICON: Final = "mdi:sync"
+NOTIFICATION_COLOR: Final = "#00A866"
+NOTIFICATION_LARGE_ICON: Final = (
+    "https://raw.githubusercontent.com/MicheledG/trade-republic-sync-home-assistant/main/"
+    "custom_components/trade_republic_sync/brand/icon.png"
+)
+
 # Tapping an outcome with problems opens Wallet by BudgetBakers on Android.
 WALLET_APP: Final = "app://com.droid4you.application.wallet"
